@@ -1,0 +1,64 @@
+{% extends "PalicaoRsvpBundle::layout.html.twig" %}
+
+{% block title %}{{ '%entity% list'|trans({'%entity%': 'Contact'}, 'admin') }}{% endblock %}
+{% macro thead(name, field, label) %}
+    {% spaceless %}
+        {% set sort = app.session.get('sort.' ~ name) %}
+        {% if sort and sort.field == field %}
+            {% if sort.type == 'DESC' %}
+                <a href="{{ path('contact_sort', {field: field, type: 'ASC'}) }}">{{ label }} <i class="icon-sort-down"></i></a>
+            {% elseif sort.type == 'ASC' %}
+                <a href="{{ path('contact_sort', {field: field, type: 'DESC'}) }}">{{ label }} <i class="icon-sort-up"></i></a>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('contact_sort', {field: field, type: 'ASC'}) }}">{{ label }} <i class="icon-sort"></i></a>
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}
+
+{% from _self import thead %}
+
+{% block body %}
+    <h1>{{ '%entity% list'|trans({'%entity%': 'Contact'}, 'admin') }}</h1>
+
+    {% include 'PalicaoRsvpBundle:Contact:filter.html.twig' with {form: form} %}
+    
+    <table class="table table-striped table-hover table-bordered records_list">
+        <thead>
+            <tr>
+                <th scope="col">{{ thead('contact', 'id', 'Id') }}</th>
+                <th scope="col">{{ thead('contact', 'email', 'Email') }}</th>
+                <th scope="col">{{ 'Actions'|trans({}, 'admin') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in paginator %}
+            <tr>
+                <td><a href="{{ path('contact_show', {id: contact.id}) }}">{{ contact.id }}</a></td>
+                <td>{{ contact.email }}</td>
+                <td>
+                                    <div class="btn-group">
+                        <a class="btn btn-small" href="{{ path('contact_show', {'id': contact.id}) }}">
+                            <i class="icon-file"></i> {{ 'show'|trans({}, 'admin') }}
+                        </a>
+                        <a class="btn btn-small" href="{{ path('contact_edit', {'id': contact.id}) }}">
+                            <i class="icon-edit"></i> {{ 'edit'|trans({}, 'admin') }}
+                        </a>
+                </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(paginator) }}
+    
+    <ul class="new_entry unstyled">
+        <li>
+            <a class="btn btn-info" href="{{ path('contact_new') }}">
+                <i class="icon-plus"></i> {{ 'Create a new entry'|trans({}, 'admin') }}
+            </a>
+        </li>
+    </ul>
+    
+{% endblock %}

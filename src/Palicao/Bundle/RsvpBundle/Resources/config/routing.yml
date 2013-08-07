@@ -1,0 +1,12 @@
+palicao_rsvp_homepage:
+    pattern:  /
+    defaults: { _controller: PalicaoRsvpBundle:Default:index }
+
+palicao_rsvp_insert_contact:
+    pattern: /insert-contact/{email}
+    defaults: { _controller: PalicaoRsvpBundle:Default:insertContact }
+    
+admin_client:
+    resource: "@PalicaoRsvpBundle/Controller/ContactController.php"
+    type:     annotation
+    prefix:   /admin

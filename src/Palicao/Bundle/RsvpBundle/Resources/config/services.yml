@@ -1,0 +1,7 @@
+parameters:
+#    palicao_rsvp.example.class: Palicao\Bundle\RsvpBundle\Example
+
+services:
+#    palicao_rsvp.example:
+#        class: %palicao_rsvp.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

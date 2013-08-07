@@ -1,0 +1,27 @@
+{% extends "PalicaoRsvpBundle::layout.html.twig" %}
+
+{% block title %}{{ '%entity% creation'|trans({'%entity%': 'Contact'}, 'admin') }}{% endblock %}
+
+{% block body %}
+    <h1>{{ '%entity% creation'|trans({'%entity%': 'Contact'}, 'admin') }}</h1>
+
+    <form action="{{ path('contact_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button class="btn btn-primary" type="submit">{{ 'Create'|trans({}, 'admin') }}</button>
+        </p>
+    </form>
+
+        
+    <div class="btn-group record_actions">
+
+        <a class="btn btn-info" href="{{ path('contact') }}">
+            <i class="icon-list"></i> {{ 'Back to the list'|trans({}, 'admin') }}
+        </a>
+
+
+
+    </div>
+
+
+{% endblock %}
