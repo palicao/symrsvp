@@ -1,3 +1,0 @@
-palicao_key_value_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PalicaoKeyValueBundle:Default:index }

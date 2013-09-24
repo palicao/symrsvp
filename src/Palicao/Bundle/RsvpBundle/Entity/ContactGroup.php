@@ -36,12 +36,18 @@ class ContactGroup
      */
     private $contacts;
     
-    
     /**
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="contact_groups")
      */
     private $owner;
+    
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Initiative", inversedBy="contact_groups")
+     */
+    private $initiatives;
+    
 
     /**
      * Constructor
@@ -49,6 +55,7 @@ class ContactGroup
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->initiatives = new ArrayCollection();
     }
     
     /**
@@ -85,26 +92,26 @@ class ContactGroup
     }
 
     /**
-     * Add contacts
+     * Add contact
      *
-     * @param \Palicao\Bundle\RsvpBundle\Entity\Contact $contacts
+     * @param \Palicao\Bundle\RsvpBundle\Entity\Contact $contact
      * @return ContactGroup
      */
-    public function addContact(Contact $contacts)
+    public function addContact(Contact $contact)
     {
-        $this->contacts[] = $contacts;
+        $this->contacts[] = $contact;
     
         return $this;
     }
 
     /**
-     * Remove contacts
+     * Remove contact
      *
-     * @param \Palicao\Bundle\RsvpBundle\Entity\Contact $contacts
+     * @param \Palicao\Bundle\RsvpBundle\Entity\Contact $contact
      */
-    public function removeContact(Contact $contacts)
+    public function removeContact(Contact $contact)
     {
-        $this->contacts->removeElement($contacts);
+        $this->contacts->removeElement($contact);
     }
 
     /**
@@ -115,6 +122,40 @@ class ContactGroup
     public function getContacts()
     {
         return $this->contacts;
+    }
+
+    
+    /**
+     * Add initiative
+     *
+     * @param \Palicao\Bundle\RsvpBundle\Entity\Initiative $initiative
+     * @return ContactGroup
+     */
+    public function addInitiative(Initiative $initiative)
+    {
+        $this->initiatives[] = $initiatives;
+    
+        return $this;
+    }
+
+    /**
+     * Remove initiative
+     *
+     * @param \Palicao\Bundle\RsvpBundle\Entity\Iniitative $initiative
+     */
+    public function removeInitiative(Initiative $initiative)
+    {
+        $this->initiatives->removeElement($initiative);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInitiatives()
+    {
+        return $this->initiatives;
     }
     
     /**

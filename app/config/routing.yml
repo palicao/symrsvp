@@ -1,7 +1,3 @@
-palicao_key_value:
-    resource: "@PalicaoKeyValueBundle/Resources/config/routing.yml"
-    prefix:   /
-
 palicao_rsvp:
     resource: "@PalicaoRsvpBundle/Resources/config/routing.yml"
     prefix:   /

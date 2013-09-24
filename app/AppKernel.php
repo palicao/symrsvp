@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new Palicao\Bundle\RsvpBundle\PalicaoRsvpBundle(),
-            new Palicao\Bundle\KeyValueBundle\PalicaoKeyValueBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

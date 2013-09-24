@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Palicao\Bundle\RsvpBundle\Entity\ContactGroup;
+use Palicao\Bundle\RsvpBundle\Entity\Initiative;
 
 /**
  * User
@@ -31,10 +32,16 @@ class User extends BaseUser
      */
     private $contact_groups;
 
-
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Initiative", mappedBy="owner")
+     */
+    private $initiatives;
+    
 
     public function __construct() {
         $this->contact_groups = new ArrayCollection();
+        $this->initiatives = new ArrayCollection();
         parent::__construct();
     }
 
@@ -63,7 +70,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove contacts
+     * Remove contact
      *
      * @param \Palicao\Bundle\RsvpBundle\Entity\ContactGroup $group
      */
@@ -82,4 +89,37 @@ class User extends BaseUser
         return $this->contact_groups;
     }
 
+    
+    /**
+     * Add initiative
+     *
+     * @param \Palicao\Bundle\RsvpBundle\Entity\Initiative $initiative
+     * @return User
+     */
+    public function addInitiative(Initiative $initiative)
+    {
+        $this->initiatives[] = $initiative;
+    
+        return $this;
+    }
+
+    /**
+     * Remove initiative
+     *
+     * @param \Palicao\Bundle\RsvpBundle\Entity\Initiative $initiative
+     */
+    public function removeInitiative(Initiative $initiative)
+    {
+        $this->initiatives->removeElement($initiative);
+    }
+
+    /**
+     * Get initiatives
+     *
+     * @return ArrayCollection
+     */
+    public function getInitiatives()
+    {
+        return $this->initiatives;
+    }
 }
